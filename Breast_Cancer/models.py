@@ -32,4 +32,4 @@ class Data(models.Model):
     result = models.IntegerField("Result", choices=RESULT, default=1)
 
     def __str__(self):
-        return self.clump_thickness
+        return str(self.clump_thickness)
