@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 import pickle
 import math
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -29,14 +30,16 @@ def index(request):
         print(final_prediction)
 
         if final_prediction == 0:
-            print("Not Having Cancer")
-            print("Predicted Value:", predictions)
-        if final_prediction == 1:
-            print("Having Cancer")
-            print("Predicted_Value: ", predictions)
+            text = "You are Not Having Cnacer. Predicted Value: "
+            messages.success(request, str(text))
 
-        context = {"predictions": predictions, "final_prediction": final_prediction}
+        if final_prediction == 1:
+            text = "You Are Having Cancer. Predicted Value: "
+            messages.warning(request, str(text))
+           
+
+        context = {"predictions": predictions}
 
 
         
-    return render (request, "Breast_Cancer/index.html")
+    return render (request, "Breast_Cancer/index.html",context)
